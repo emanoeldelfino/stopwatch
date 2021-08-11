@@ -4,6 +4,7 @@ playPause.addEventListener("click", () => {
   const playPauseText = playPause.innerText;
 
   playPause.innerText = playPauseText === "play_arrow" ? "pause" : "play_arrow";
+  playPause.innerText = toggleText(playPause, "play_arrow", "pause");
 });
 
 function toggleText(elem, ...args) {
@@ -26,6 +27,3 @@ function toggleText(elem, ...args) {
 function hasDuplicates(array) {
     return (new Set(array)).size !== array.length;
 }
-
-toggleText(playPause, "a", "b", "c", "d");
-toggleText(playPause, "play_arrow", "pause");
