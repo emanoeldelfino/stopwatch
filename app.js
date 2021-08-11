@@ -11,10 +11,11 @@ function toggleText(elem, ...args) {
   
   if (args.includes(elemText) && !hasDuplicates(args)) {
      console.log(args.indexOf(elemText));
+    let replaceText = "";
     if (args.indexOf(elemText) < args.length - 1) {
-      const replaceText = args[args.indexOf(elemText) + 1];
+      replaceText = args[args.indexOf(elemText) + 1];
     } else {
-      const replaceText = args[0];
+      replaceText = args[0];
     }
     console.log(replaceText);
   } else {
