@@ -27,4 +27,5 @@ function hasDuplicates(array) {
 }
 
 toggleText(playPause, "a", "b", "c", "d");
+console.log("'-'");
 toggleText(playPause, "play_arrow", "pause");
