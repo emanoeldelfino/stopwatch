@@ -27,3 +27,4 @@ function hasDuplicates(array) {
 }
 
 toggleText(playPause, "a", "b", "c", "d");
+toggleText(playPause, "play_arrow", "pause");
