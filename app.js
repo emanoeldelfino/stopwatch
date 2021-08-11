@@ -11,16 +11,15 @@ function toggleText(elem, ...args) {
   const elemText = elem.innerText;
   
   if (args.includes(elemText) && !hasDuplicates(args)) {
-     console.log(args.indexOf(elemText));
     let replaceText = "";
     if (args.indexOf(elemText) < args.length - 1) {
       replaceText = args[args.indexOf(elemText) + 1];
     } else {
       replaceText = args[0];
     }
-    console.log(replaceText);
+    return replaceText;
   } else {
-    console.log("Invalid arguments after elem. It doesn't include the text of element or it has duplicates."); 
+    throw new Error("Invalid arguments after elem. It doesn't include the text of element or it has duplicates.");
   }
 }
 
