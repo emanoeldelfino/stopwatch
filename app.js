@@ -3,7 +3,7 @@ const playPause = document.querySelector("#play-pause");
 playPause.addEventListener("click", () => {
   const playPauseText = playPause.innerText;
 
-  playPause.innerText = playPauseText === "play_arrow" ? "pause" : "play_arrow";
+  // playPause.innerText = playPauseText === "play_arrow" ? "pause" : "play_arrow";
   playPause.innerText = toggleText(playPause, "play_arrow", "pause");
 });
 
