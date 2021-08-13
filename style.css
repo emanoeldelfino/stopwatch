@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --background: black;
+  --foreground: white;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +13,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 #main {
@@ -27,7 +35,7 @@ body {
   font-size: 50px;
   height: 250px;
   width: 250px;
-  border: 1px solid black;
+  border: 1px solid var(--foreground);
   border-radius: 50%;
 }
 
@@ -55,6 +63,13 @@ body {
   font-size: 50px;
   cursor: pointer;
   user-select: none;
+}
+
+#dark-mode-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
 }
 
 @media (max-width: 400px) {
