@@ -1,9 +1,15 @@
 const playPause = document.querySelector("#play-pause");
 const darkModeBtn = document.querySelector("#dark-mode-btn");
 const r = document.querySelector(":root");
+const timer = document.querySelector("#timer");
 
 playPause.addEventListener("click", () => {
   playPause.innerText = toggleText(playPause, "play_arrow", "pause");
+  if (playPause.innerText === "pause") {
+    timerInterval = setInterval(timerCycle, 1000);
+  } else {
+    clearInterval(timerInterval);
+  }
 });
 
 darkModeBtn.addEventListener("click", () => {
@@ -39,4 +45,30 @@ function toggleText(elem, ...args) {
 
 function hasDuplicates(array) {
   return new Set(array).size !== array.length;
+}
+
+// Code adapted from https://dev.to/gspteck/create-a-stopwatch-in-javascript-2mak
+
+let sec = 0,
+  min = 0,
+  hr = 0;
+
+function timerCycle() {
+  sec += 1;
+
+  if (sec == 60) {
+    min += 1;
+    sec = 0;
+  }
+  if (min == 60) {
+    hr += 1;
+    console.log(hr);
+    min = 0;
+    sec = 0;
+  }
+
+  timer.innerHTML = `${String(hr).padStart(2, "0")}:${String(min).padStart(
+    2,
+    "0"
+  )}:${String(sec).padStart(2, "0")}`;
 }
