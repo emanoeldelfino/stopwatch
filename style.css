@@ -44,11 +44,11 @@ body {
   align-items: center;
 }
 
-#play-pause {
+span.button {
   margin-top: 25px;
-  font-size: 50px;
   cursor: pointer;
   user-select: none;
+  font-size: 50px;
 }
 
 #dark-mode-btn {
@@ -59,7 +59,7 @@ body {
 }
 
 @media (max-width: 400px) {
-  #play-pause {
+  #buttons {
     margin-top: 0;
     position: absolute;
     bottom: 10px;

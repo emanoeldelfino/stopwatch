@@ -2,15 +2,7 @@ const playPause = document.querySelector("#play-pause");
 const darkModeBtn = document.querySelector("#dark-mode-btn");
 const r = document.querySelector(":root");
 const timer = document.querySelector("#timer");
-
-playPause.addEventListener("click", () => {
-  playPause.innerText = toggleText(playPause, "play_arrow", "pause");
-  if (playPause.innerText === "pause") {
-    timerInterval = setInterval(timerCycle, 1000);
-  } else {
-    clearInterval(timerInterval);
-  }
-});
+const reset = document.querySelector("#reset");
 
 darkModeBtn.addEventListener("click", () => {
   darkModeBtn.innerText = toggleText(darkModeBtn, "dark_mode", "lightbulb");
@@ -21,6 +13,27 @@ darkModeBtn.addEventListener("click", () => {
       : ["white", "black"];
   r.style.setProperty("--background", bg);
   r.style.setProperty("--foreground", fg);
+});
+
+playPause.addEventListener("click", () => {
+  playPause.innerText = toggleText(playPause, "play_arrow", "pause");
+  if (playPause.innerText === "pause") {
+    timerInterval = setInterval(timerCycle, 1000);
+  } else {
+    clearInterval(timerInterval);
+  }
+});
+
+reset.addEventListener("click", () => {
+  clearInterval(timerInterval);
+  timer.innerHTML = "00:00:00";
+  sec = 0;
+  min = 0;
+  hr = 0;
+
+  if ((playPause.innerText = "pause")) {
+    playPause.innerText = toggleText(playPause, "play_arrow", "pause");
+  }
 });
 
 function toggleText(elem, ...args) {
