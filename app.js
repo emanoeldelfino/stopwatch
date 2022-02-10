@@ -3,6 +3,28 @@ const darkModeBtn = document.querySelector("#dark-mode-btn");
 const r = document.querySelector(":root");
 const timer = document.querySelector("#timer");
 const reset = document.querySelector("#reset");
+const title = document.querySelector("title");
+
+// inspired by https://stackoverflow.com/questions/26317480/how-can-i-create-a-stopwatch-using-date-now-in-js
+
+let previousTime, elapsedTime = 0;
+
+function updateTime() {
+  let tempTime = elapsedTime;
+  let milliseconds = tempTime % 1000;
+  tempTime = Math.floor(tempTime / 1000);
+  let seconds = tempTime % 60;
+  tempTime = Math.floor(tempTime / 60);
+  let minutes = tempTime % 60;
+  tempTime = Math.floor(tempTime / 60);
+  let hours = tempTime % 60;
+
+  let time = [hours, minutes, seconds].map(temp => temp.toString().padStart(2, "0")).join(":");
+
+  title.innerText = time + "." + milliseconds.toString().padStart(3, "0");
+
+  timer.innerHTML = time + ".<i>" + milliseconds.toString().padStart(3, "0") + "</i>";
+}
 
 darkModeBtn.addEventListener("click", () => {
   darkModeBtn.innerText = toggleText(darkModeBtn, "dark_mode", "lightbulb");
@@ -18,18 +40,27 @@ darkModeBtn.addEventListener("click", () => {
 playPause.addEventListener("click", () => {
   playPause.innerText = toggleText(playPause, "play_arrow", "pause");
   if (playPause.innerText === "pause") {
-    timerInterval = setInterval(timerCycle, 1000);
+    timerInterval = setInterval(() => {
+      if (!previousTime) {
+        previousTime = Date.now();
+      }
+
+      elapsedTime += Date.now() - previousTime;
+      previousTime = Date.now();
+
+      updateTime();
+    }, 50);
   } else {
     clearInterval(timerInterval);
+    previousTime = null;
   }
 });
 
 reset.addEventListener("click", () => {
   clearInterval(timerInterval);
-  timer.innerHTML = "00:00:00";
-  sec = 0;
-  min = 0;
-  hr = 0;
+  previousTime = null;
+  elapsedTime = 0;
+  updateTime();
 
   if ((playPause.innerText = "pause")) {
     playPause.innerText = toggleText(playPause, "play_arrow", "pause");
@@ -58,30 +89,4 @@ function toggleText(elem, ...args) {
 
 function hasDuplicates(array) {
   return new Set(array).size !== array.length;
-}
-
-// Code adapted from https://dev.to/gspteck/create-a-stopwatch-in-javascript-2mak
-
-let sec = 0,
-  min = 0,
-  hr = 0;
-
-function timerCycle() {
-  sec += 1;
-
-  if (sec == 60) {
-    min += 1;
-    sec = 0;
-  }
-  if (min == 60) {
-    hr += 1;
-    console.log(hr);
-    min = 0;
-    sec = 0;
-  }
-
-  timer.innerHTML = `${String(hr).padStart(2, "0")}:${String(min).padStart(
-    2,
-    "0"
-  )}:${String(sec).padStart(2, "0")}`;
 }
