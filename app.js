@@ -11,7 +11,7 @@ let previousTime, elapsedTime = 0;
 
 function updateTime() {
   let tempTime = elapsedTime;
-  let milliseconds = tempTime % 1000;
+  let milliseconds = Math.floor((tempTime % 1000) / 10);
   tempTime = Math.floor(tempTime / 1000);
   let seconds = tempTime % 60;
   tempTime = Math.floor(tempTime / 60);
@@ -21,9 +21,11 @@ function updateTime() {
 
   let time = [hours, minutes, seconds].map(temp => temp.toString().padStart(2, "0")).join(":");
 
-  title.innerText = time + "." + milliseconds.toString().padStart(3, "0");
+  let msString = milliseconds.toString().padStart(2, "0");
 
-  timer.innerHTML = time + ".<i>" + milliseconds.toString().padStart(3, "0") + "</i>";
+  title.innerText = time;
+
+  timer.innerHTML = time + ".<i>" + msString + "</i>";
 }
 
 darkModeBtn.addEventListener("click", () => {
