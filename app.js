@@ -25,7 +25,7 @@ function updateTime() {
 
   title.innerText = time;
 
-  timer.innerHTML = time + ".<i>" + msString + "</i>";
+  timer.innerHTML = time + "<i>." + msString + "</i>";
 }
 
 darkModeBtn.addEventListener("click", () => {
@@ -37,6 +37,14 @@ darkModeBtn.addEventListener("click", () => {
       : ["white", "black"];
   r.style.setProperty("--background", bg);
   r.style.setProperty("--foreground", fg);
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === " ") {
+    playPause.click();
+  } else {
+    e.key.toUpperCase() === "R" && reset.click();
+  }
 });
 
 playPause.addEventListener("click", () => {
@@ -59,7 +67,7 @@ playPause.addEventListener("click", () => {
 });
 
 reset.addEventListener("click", () => {
-  clearInterval(timerInterval);
+  typeof timerInterval !== "undefined" && clearInterval(timerInterval);
   previousTime = null;
   elapsedTime = 0;
   updateTime();
